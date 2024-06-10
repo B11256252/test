@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅遊網站</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .main {
+            padding: 16px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* 響應式設計的斷點 */
+        @media screen and (max-width: 768px) {
+            .navbar a {
+                float: none;
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .main {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="#home">首頁</a>
+        <a href="#news">新聞</a>
+        <a href="#contact">聯絡我們</a>
+    </div>
+
+    <div class="main" id="home">
+        <h1>歡迎來到旅遊網站</h1>
+        <p>這是首頁，介紹不同的旅遊地點。</p>
+    </div>
+
+    <div class="main" id="news" style="display:none;">
+        <h1>旅遊新聞</h1>
+        <p>這裡有最新的旅遊資訊。</p>
+        <a href="https://udn.com/news/cate/1013" target="_blank">聯合旅遊網</a>
+        <a href="https://travel.ettoday.net/" target="_blank">ETtoday 旅遊雲</a>
+        <a href="https://hk.news.yahoo.com/travel/" target="_blank">Yahoo旅遊</a>
+    </div>
+
+    <div class="main" id="contact" style="display:none;">
+        <h1>聯絡我們</h1>
+        <p>有任何問題，歡迎聯絡我們。</p>
+        <p>電話:0987987987</p>
+        <p>電子郵件:B11256252@mail.npust.edu.tw</p>
+    </div>
+
+    <div class="footer">
+        <p>版權所有 © 2024 旅遊網站</p>
+    </div>
+
+    <script>
+        // JavaScript for handling page switches
+        function switchPage(pageId) {
+            var pages = document.getElementsByClassName('main');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = 'none';
+            }
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        // Add event listeners to navbar links
+        document.addEventListener('DOMContentLoaded', function() {
+            var navLinks = document.querySelectorAll('.navbar a');
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var pageId = this.getAttribute('href').substring(1);
+                    switchPage(pageId);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
