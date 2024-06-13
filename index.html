@@ -6,11 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>旅遊網站</title>
     <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .navbar {
@@ -29,6 +42,16 @@
 
         .main {
             padding: 16px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: none;
+            text-align: center; /* 將內容置中 */
+            flex: 1;
+        }
+
+        .main.active {
+            opacity: 1;
+            display: block;
         }
 
         .footer {
@@ -38,77 +61,106 @@
             padding: 10px;
         }
 
-        /* 響應式設計的斷點 */
-        @media screen and (max-width: 768px) {
+        /* 讓圖片和字體大小自適應 */
+        .content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .content p {
+            font-size: 1em; /* 或者其他相對單位，如百分比 */
+        }
+
+        @media screen and (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+            }
+
             .navbar a {
                 float: none;
                 width: 100%;
-                text-align: left;
             }
         }
 
-        @media screen and (max-width: 576px) {
+        @media screen and (max-width: 500px) {
             .main {
                 padding: 10px;
             }
+        }
+
+        /* 新增的 CSS */
+        #contact img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="navbar">
-        <a href="#home">首頁</a>
-        <a href="#news">新聞</a>
-        <a href="#contact">聯絡我們</a>
-    </div>
+<div class="navbar">
+    <a href="#home">首頁</a>
+    <a href="#news">新聞</a>
+    <a href="#contact">聯絡我們</a>
+</div>
 
-    <div class="main" id="home">
-        <h1>歡迎來到旅遊網站</h1>
-        <p>這是首頁，介紹不同的旅遊地點。</p>
+<div class="main active" id="home">
+    <h1>歡迎來到旅遊網站</h1>
+    <p>這是首頁，介紹不同的旅遊地點。</p>
+    <div class="content">
+        <h2>屏科大介紹</h2>
+        <p>屏科大是內埔著名的國家公園，提供豐富的景觀。</p>
+        <a href="https://wp.npust.edu.tw/" target="_blank">
+            <img src="https://i.imgur.com/UMabq2W.jpeg" alt="屏科大照片">
+        </a>
+        <a href="https://wp.npust.edu.tw/" target="_blank">屏科大網址</a>
     </div>
+</div>
 
-    <div class="main" id="news" style="display:none;">
-        <h1>旅遊新聞</h1>
-        <p>這裡有最新的旅遊資訊。</p>
-        <a href="https://udn.com/news/cate/1013" target="_blank">聯合旅遊網</a>
-        <a href="https://travel.ettoday.net/" target="_blank">ETtoday 旅遊雲</a>
-        <a href="https://hk.news.yahoo.com/travel/" target="_blank">Yahoo旅遊</a>
-    </div>
+<div class="main" id="news">
+    <h1>旅遊新聞</h1>
+    <p>這裡有最新的旅遊資訊。</p>
+    <a href="https://udn.com/news/cate/1013" target="_blank">聯合旅遊網</a>
+    <a href="https://travel.ettoday.net/" target="_blank">ETtoday 旅遊雲</a>
+    <a href="https://hk.news.yahoo.com/travel/" target="_blank">Yahoo旅遊</a>
+</div>
 
-    <div class="main" id="contact" style="display:none;">
-        <h1>聯絡我們</h1>
-        <p>有任何問題，歡迎聯絡我們。</p>
-        <p>電話:0987987987</p>
-        <p>電子郵件:B11256252@mail.npust.edu.tw</p>
-    </div>
+<div class="main" id="contact">
+    <h1>聯絡我們</h1>
+    <p>有任何問題，歡迎聯絡我們。</p>
+    <p>電話: <a href="tel:0987987987">0987987987</a></p>
+    <p>電子郵件: <a href="mailto:B11256252@mail.npust.edu.tw">B11256252@mail.npust.edu.tw</a></p>
+    <p>地址:912屏東縣內埔鄉學府路1號</p>
+    <a href="tel:0987987987">
+        <img src="https://www.gogo-alishan.com.tw/images/title05.png" alt="聯絡我們">
+    </a>
+</div>
 
-    <div class="footer">
-        <p>版權所有 © 2024 旅遊網站</p>
-    </div>
 
-    <script>
-        // JavaScript for handling page switches
-        function switchPage(pageId) {
-            var pages = document.getElementsByClassName('main');
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].style.display = 'none';
-            }
-            document.getElementById(pageId).style.display = 'block';
+<div class="footer">
+    <p>版權所有 © 2024 旅遊網站</p>
+</div>
+
+<script>
+    function switchPage(pageId) {
+        var pages = document.getElementsByClassName('main');
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].classList.remove('active');
         }
+        document.getElementById(pageId).classList.add('active');
+    }
 
-        // Add event listeners to navbar links
-        document.addEventListener('DOMContentLoaded', function() {
-            var navLinks = document.querySelectorAll('.navbar a');
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    var pageId = this.getAttribute('href').substring(1);
-                    switchPage(pageId);
-                });
+    document.addEventListener('DOMContentLoaded', function() {
+        var navLinks = document.querySelectorAll('.navbar a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var pageId = this.getAttribute('href').substring(1);
+                switchPage(pageId);
             });
         });
-    </script>
+    });
+</script>
 
 </body>
 
